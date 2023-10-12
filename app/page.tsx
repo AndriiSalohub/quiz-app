@@ -1,3 +1,4 @@
+import DropDownOptions from "@/components/DropDownOptions";
 import Heading from "@/components/Heading";
 import QuestionNumberInput from "@/components/QuestionNumberInput";
 
@@ -7,6 +8,7 @@ const Home = () => {
             <Heading />
             <section className="my-2 rounded-lg shadow-xl w-[50%] bg-white p-10">
                 <QuestionNumberInput />
+                <DropDownOptions />
             </section>
         </main>
     );
