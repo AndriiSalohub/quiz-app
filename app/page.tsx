@@ -1,6 +1,7 @@
 import DropDownOptions from "@/components/DropDownOptions";
 import Heading from "@/components/Heading";
 import QuestionNumberInput from "@/components/QuestionNumberInput";
+import StartQuizBtn from "@/components/StartQuizBtn";
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
             <section className="my-2 rounded-lg shadow-xl w-[50%] bg-white p-10">
                 <QuestionNumberInput />
                 <DropDownOptions />
+                <StartQuizBtn />
             </section>
         </main>
     );
