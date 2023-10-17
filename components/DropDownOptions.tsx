@@ -6,10 +6,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ICategories } from "@/store/QuizSlice";
+import { useAppDispatch } from "@/hooks/redux-toolkit";
+import { ICategories, updateCategory } from "@/redux/slices/quizSlice";
 import { useEffect, useState } from "react";
 
 const DropDownOptions = () => {
+    const dispatch = useAppDispatch();
     const [categories, setCategories] = useState<ICategories[]>([]);
 
     useEffect(() => {
@@ -29,8 +31,13 @@ const DropDownOptions = () => {
                     Select category
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    {categories.map((item) => (
-                        <DropdownMenuItem>{item.name}</DropdownMenuItem>
+                    {categories.map((item: ICategories) => (
+                        <DropdownMenuItem
+                            key={item.id}
+                            onClick={() => dispatch(updateCategory(item))}
+                        >
+                            {item.name}
+                        </DropdownMenuItem>
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>

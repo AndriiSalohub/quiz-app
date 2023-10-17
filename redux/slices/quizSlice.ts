@@ -26,7 +26,7 @@ const initialState: IState = {
     status: false,
 };
 
-export const QuizSlice = createSlice({
+export const quizSlice = createSlice({
     name: "quiz",
     initialState,
     reducers: {
@@ -47,3 +47,12 @@ export const QuizSlice = createSlice({
         },
     },
 });
+
+export const {
+    updateNumberOfQuestions,
+    updateCategory,
+    updateType,
+    updateLevel,
+    updateScore,
+} = quizSlice.actions;
+export const quizReducer = quizSlice.reducer;
