@@ -17,11 +17,11 @@ interface IState {
 const initialState: IState = {
     numberOfQuestions: 10,
     category: {
-        id: 9,
-        name: "General Knowledge",
+        id: 0,
+        name: "",
     },
-    type: "boolean",
-    level: "medium",
+    type: "",
+    level: "",
     score: 0,
     status: false,
 };
