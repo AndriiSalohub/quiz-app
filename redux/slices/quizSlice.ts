@@ -45,6 +45,9 @@ export const quizSlice = createSlice({
         updateScore: (state) => {
             state.numberOfQuestions += 1;
         },
+        startQuiz: (state) => {
+            state.status = true;
+        },
     },
 });
 
@@ -54,5 +57,6 @@ export const {
     updateType,
     updateLevel,
     updateScore,
+    startQuiz,
 } = quizSlice.actions;
 export const quizReducer = quizSlice.reducer;
