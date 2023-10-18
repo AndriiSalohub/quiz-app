@@ -1,4 +1,12 @@
-const QuestionNumberInput = () => {
+"use client";
+
+import { useAppDispatch } from "@/hooks/redux-toolkit";
+import { updateNumberOfQuestions } from "@/redux/slices/quizSlice";
+import { ChangeEvent, FC } from "react";
+
+const QuestionNumberInput: FC = () => {
+    const dispatch = useAppDispatch();
+
     return (
         <>
             <label
@@ -14,6 +22,9 @@ const QuestionNumberInput = () => {
                 defaultValue={10}
                 min={0}
                 max={50}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    dispatch(updateNumberOfQuestions(+e.target.value))
+                }
             />
         </>
     );

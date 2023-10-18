@@ -2,8 +2,9 @@ import DropDownOptions from "@/components/DropDownOptions";
 import Heading from "@/components/Heading";
 import QuestionNumberInput from "@/components/QuestionNumberInput";
 import StartQuizBtn from "@/components/StartQuizBtn";
+import { FC } from "react";
 
-const Home = () => {
+const Home: FC = () => {
     return (
         <main className="flex flex-col justify-center items-center my-20">
             <Heading />

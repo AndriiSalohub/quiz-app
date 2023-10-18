@@ -13,12 +13,12 @@ import {
     updateLevel,
     updateType,
 } from "@/redux/slices/quizSlice";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const levels = ["Easy", "Medium", "Hard"];
 const types = ["Boolean", "Multiple"];
 
-const DropDownOptions = () => {
+const DropDownOptions: FC = () => {
     const dispatch = useAppDispatch();
     const { category, type, level } = useAppSelector((state) => state.quiz);
     const [categories, setCategories] = useState<ICategories[]>([]);
