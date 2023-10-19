@@ -1,4 +1,3 @@
-import ReduxProvide from "@/redux/provider";
 import "@/styles/globals.css";
 import "@/styles/reset.css";
 import type { Metadata } from "next";
@@ -20,9 +19,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<IProps> = ({ children }) => {
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <ReduxProvide>{children}</ReduxProvide>
-            </body>
+            <body className={inter.className}>{children}</body>
         </html>
     );
 };
