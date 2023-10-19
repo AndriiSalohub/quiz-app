@@ -18,6 +18,7 @@ interface IQuizState {
     changeCategory: (category: ICategories) => void;
     changeLevel: (level: string) => void;
     changeType: (type: string) => void;
+    startQuiz: () => void;
 }
 
 export const useQuizStore = create<IQuizState>()((set) => ({
@@ -58,6 +59,13 @@ export const useQuizStore = create<IQuizState>()((set) => ({
             config: {
                 ...state.config,
                 type,
+            },
+        })),
+    startQuiz: () =>
+        set((state) => ({
+            config: {
+                ...state.config,
+                status: true,
             },
         })),
 }));
