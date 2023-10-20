@@ -1,3 +1,4 @@
+"use client";
 import { useQuizStore } from "@/store/store";
 import { FC } from "react";
 import { Button } from "./ui/button";
