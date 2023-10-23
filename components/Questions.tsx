@@ -38,6 +38,14 @@ const Questions: FC = () => {
         getQuestions();
     }, [category, type, level]);
 
+    const handleNext = () => {
+        let remainingQuestions = [...questions];
+        remainingQuestions.shift();
+        setQuestions([...remainingQuestions]);
+    };
+
+    console.log(questions);
+
     return (
         <section className="flex flex-col items-center justify-center p-10 w-[90%] shadow-2xl shadow-blue-200 rounded-lg">
             <h2 className="lg:text-3xl text-2xl font-bold text-blue-600 text-center">
@@ -48,7 +56,7 @@ const Questions: FC = () => {
                     <AnswerButton key={answer} text={answer} />
                 ))}
             </div>
-            <NextButton />
+            <NextButton handleNext={handleNext} />
         </section>
     );
 };
