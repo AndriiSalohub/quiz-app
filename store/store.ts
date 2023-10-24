@@ -19,6 +19,7 @@ interface IQuizState {
     changeLevel: (level: string) => void;
     changeType: (type: string) => void;
     startQuiz: () => void;
+    updateScore: () => void;
 }
 
 export const useQuizStore = create<IQuizState>()((set) => ({
@@ -66,6 +67,13 @@ export const useQuizStore = create<IQuizState>()((set) => ({
             config: {
                 ...state.config,
                 status: true,
+            },
+        })),
+    updateScore: () =>
+        set((state) => ({
+            config: {
+                ...state.config,
+                score: state.config.score++,
             },
         })),
 }));

@@ -7,10 +7,13 @@ import NextButton from "./NextButton";
 
 const Questions: FC = () => {
     const [questions, setQuestions] = useState<any>([]);
+    const [answ, setAnsw] = useState<string>("");
 
     const { numberOfQuestions, category, level, type } = useQuizStore(
         (state) => state.config
     );
+
+    const updateScore = useQuizStore((state) => state.updateScore);
 
     useEffect(() => {
         const getQuestions = async () => {
@@ -42,6 +45,14 @@ const Questions: FC = () => {
         let remainingQuestions = [...questions];
         remainingQuestions.shift();
         setQuestions([...remainingQuestions]);
+        setAnsw("");
+    };
+
+    const checkAnswer = (answer: string) => {
+        if (answer === questions[0].correct_answer) {
+            updateScore();
+        }
+        setAnsw(questions[0].correct_answer);
     };
 
     console.log(questions);
@@ -53,7 +64,12 @@ const Questions: FC = () => {
             </h2>
             <div className="flex justify-evenly items-center w-full my-10 flex-wrap">
                 {questions[0]?.answers.map((answer: string) => (
-                    <AnswerButton key={answer} text={answer} />
+                    <AnswerButton
+                        key={answer}
+                        text={answer}
+                        checkAnswer={checkAnswer}
+                        answ={answ}
+                    />
                 ))}
             </div>
             <NextButton handleNext={handleNext} />
