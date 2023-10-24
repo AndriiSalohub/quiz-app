@@ -13,6 +13,7 @@ interface IQuizState {
         level: string;
         score: number;
         status: boolean;
+        currentQuestion: number;
     };
     updateNumberOfQuestions: (numberOfQuestions: number) => void;
     changeCategory: (category: ICategories) => void;
@@ -20,6 +21,7 @@ interface IQuizState {
     changeType: (type: string) => void;
     startQuiz: () => void;
     updateScore: () => void;
+    updateCurrentQuestion: () => void;
 }
 
 export const useQuizStore = create<IQuizState>()((set) => ({
@@ -33,6 +35,7 @@ export const useQuizStore = create<IQuizState>()((set) => ({
         level: "",
         score: 0,
         status: false,
+        currentQuestion: 1,
     },
     updateNumberOfQuestions: (numberOfQuestions) =>
         set((state) => ({
@@ -73,7 +76,14 @@ export const useQuizStore = create<IQuizState>()((set) => ({
         set((state) => ({
             config: {
                 ...state.config,
-                score: state.config.score++,
+                score: (state.config.score += 1),
+            },
+        })),
+    updateCurrentQuestion: () =>
+        set((state) => ({
+            config: {
+                ...state.config,
+                currentQuestion: (state.config.currentQuestion += 1),
             },
         })),
 }));

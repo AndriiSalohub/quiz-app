@@ -14,6 +14,9 @@ const Questions: FC = () => {
     );
 
     const updateScore = useQuizStore((state) => state.updateScore);
+    const updateCurrentQuestion = useQuizStore(
+        (state) => state.updateCurrentQuestion
+    );
 
     useEffect(() => {
         const getQuestions = async () => {
@@ -34,7 +37,6 @@ const Questions: FC = () => {
                 return e;
             });
 
-            console.log(shuffledQuestions, "shuffeled");
             setQuestions([...shuffledQuestions]);
         };
 
@@ -46,6 +48,7 @@ const Questions: FC = () => {
         remainingQuestions.shift();
         setQuestions([...remainingQuestions]);
         setAnsw("");
+        updateCurrentQuestion();
     };
 
     const checkAnswer = (answer: string) => {
@@ -54,8 +57,6 @@ const Questions: FC = () => {
         }
         setAnsw(questions[0].correct_answer);
     };
-
-    console.log(questions);
 
     return (
         <section className="flex flex-col items-center justify-center p-10 w-[90%] shadow-2xl shadow-blue-200 rounded-lg">
