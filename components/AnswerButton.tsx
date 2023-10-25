@@ -23,7 +23,7 @@ const AnswerButton: FC<IProps> = ({ answer, checkAnswer, userAnswer }) => {
             )}
             onClick={() => checkAnswer(answer)}
         >
-            {answer}
+            {answer.replace(/&quot;/g, '"')}
         </button>
     );
 };

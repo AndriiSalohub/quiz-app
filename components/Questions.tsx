@@ -80,7 +80,7 @@ const Questions: FC = () => {
                 </h3>
             )}
             <h2 className="lg:text-3xl text-2xl font-bold text-blue-600 text-center">
-                {questions[0]?.question}
+                {questions[0]?.question.replace(/&quot;/g, '"')}
             </h2>
             <div className="flex justify-evenly items-center w-full my-10 flex-wrap">
                 {questions[0]?.answers.map((answer: string) => (
