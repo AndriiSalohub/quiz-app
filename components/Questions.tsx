@@ -5,9 +5,20 @@ import { FC, useEffect, useState } from "react";
 import AnswerButton from "./AnswerButton";
 import NextButton from "./NextButton";
 
+interface IQuestions {
+    answers: string[];
+    category: string;
+    correct_answer: string;
+    difficult: string;
+    incorrect_answers: string[];
+    question: string;
+    type: string;
+}
+
 const Questions: FC = () => {
-    const [questions, setQuestions] = useState<any>([]);
-    const [answ, setAnsw] = useState<string>("");
+    const [questions, setQuestions] = useState<IQuestions[]>([]);
+    const [userAnswer, setUserAnswer] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { numberOfQuestions, category, level, type } = useQuizStore(
         (state) => state.config
@@ -20,6 +31,7 @@ const Questions: FC = () => {
 
     useEffect(() => {
         const getQuestions = async () => {
+            setLoading(true);
             const { results } = await (
                 await fetch(
                     `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${
@@ -37,7 +49,9 @@ const Questions: FC = () => {
                 return e;
             });
 
+            console.log(shuffledQuestions);
             setQuestions([...shuffledQuestions]);
+            setLoading(false);
         };
 
         getQuestions();
@@ -47,7 +61,7 @@ const Questions: FC = () => {
         let remainingQuestions = [...questions];
         remainingQuestions.shift();
         setQuestions([...remainingQuestions]);
-        setAnsw("");
+        setUserAnswer("");
         updateCurrentQuestion();
     };
 
@@ -55,11 +69,16 @@ const Questions: FC = () => {
         if (answer === questions[0].correct_answer) {
             updateScore();
         }
-        setAnsw(questions[0].correct_answer);
+        setUserAnswer(questions[0].correct_answer);
     };
 
     return (
         <section className="flex flex-col items-center justify-center p-10 w-[90%] shadow-2xl shadow-blue-200 rounded-lg">
+            {loading && (
+                <h3 className="lg:text-3xl text-2xl font-bold text-blue-600 text-center">
+                    Loading...
+                </h3>
+            )}
             <h2 className="lg:text-3xl text-2xl font-bold text-blue-600 text-center">
                 {questions[0]?.question}
             </h2>
@@ -67,9 +86,9 @@ const Questions: FC = () => {
                 {questions[0]?.answers.map((answer: string) => (
                     <AnswerButton
                         key={answer}
-                        text={answer}
+                        answer={answer}
                         checkAnswer={checkAnswer}
-                        answ={answ}
+                        userAnswer={userAnswer}
                     />
                 ))}
             </div>
