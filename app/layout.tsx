@@ -9,16 +9,20 @@ import { FC, ReactNode } from "react";
 interface IProps {
     children: ReactNode;
     quiz: ReactNode;
+    end: ReactNode;
 }
 
 const inter = Inter({ subsets: ["latin"] });
 
-const RootLayout: FC<IProps> = ({ children, quiz }) => {
+const RootLayout: FC<IProps> = ({ children, quiz, end }) => {
     const status = useQuizStore((state) => state.config.status);
+    const endQuiz = useQuizStore((state) => state.config.quizEnd);
 
     return (
         <html lang="en">
-            <body className={inter.className}>{status ? quiz : children}</body>
+            <body className={inter.className}>
+                {status && !endQuiz ? quiz : endQuiz && status ? end : children}
+            </body>
         </html>
     );
 };
