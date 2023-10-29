@@ -14,7 +14,7 @@ const NextButton: FC<IProps> = ({ handleNext }) => {
 
     return (
         <Button
-            className="hover:bg-blue-500 duration-300 ease-in-out hover:text-white"
+            className="sm:hover:bg-blue-500 active:bg-blue-500 duration-300 ease-in-out hover:text-white"
             onClick={() => {
                 handleNext();
                 currentQuestion + 1 > numberOfQuestions ? endQuiz() : null;
